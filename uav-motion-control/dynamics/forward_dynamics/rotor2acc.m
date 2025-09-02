@@ -2,12 +2,12 @@ function a = rotor2acc(rotorspeeds, attitude, rdot, m, g, k, kd)
     % author: LZY
     % last edited: ZRT
     % change to the file:
-    % Ô­ÎÄ¼şÃû acceleration, Îª·ÀÖ¹ÆçÒå, ¸ÄÃûÎª rotor2acc
-    % Ö±½ÓÊäÈëĞı×ª¾ØÕóattitude£¬²»ÔÙÊ¹ÓÃÅ·À­½Ç
+    % åŸæ–‡ä»¶å acceleration, ä¸ºé˜²æ­¢æ­§ä¹‰, æ”¹åä¸º rotor2acc
+    % ç›´æ¥è¾“å…¥æ—‹è½¬çŸ©é˜µattitudeï¼Œä¸å†ä½¿ç”¨æ¬§æ‹‰è§’
     
-    %   rotorspeeds ËÄ¸öµç»úµÄ×ªËÙ
-    %   attitude Î»×Ë ±ä»»¾ØÕó
-    %   rdot ÏßËÙ¶ÈÊ¸Á¿ Õ³ĞÔ×èÄá ×èÁ¦ÓëÏßËÙ¶È³ÉÕı±È
+    %   rotorspeeds å››ä¸ªç”µæœºçš„è½¬é€Ÿ
+    %   attitude ä½å§¿ å˜æ¢çŸ©é˜µ
+    %   rdot çº¿é€Ÿåº¦çŸ¢é‡ ç²˜æ€§é˜»å°¼ é˜»åŠ›ä¸çº¿é€Ÿåº¦æˆæ­£æ¯”
     gravity = [0; 0; -g];
     R = (attitude);
     T = R * thrust(rotorspeeds, k);

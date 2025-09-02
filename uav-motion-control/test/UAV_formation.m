@@ -2,10 +2,10 @@ clear all; close all;
 num_uav = 10;
 dt = 0.01;
 params = load_params();
-quads = cell(1,num_uav);
+quads = cell(1,num_uav); % 创建单元格数组，存储无人机对象
 for i = 1:num_uav
-    quads{i} = Quadrotor(params);
-    quads{i}.dt = dt;
+    quads{i} = Quadrotor(params);% 初始化每个无人机
+    quads{i}.dt = dt;             % 设置时间步长
 end
 
 duration = 20;
@@ -38,12 +38,13 @@ a0 = [0,0,0];
 v1 = [0,0,0];
 a1 = [0,0,0];
 
-[pt,vt,at,Jt] = min_snap_simple_fcn(waypts,v0,a0,v1,a1,duration,tspan);
+[pt,vt,at,Jt] = min_snap_simple_fcn(waypts,v0,a0,v1,a1,duration,tspan);% 生成最小加加速度轨迹作为期望
 disp(['max vt' num2str(max(vt(1,:)))])
 disp(['max at' num2str(max(at(1,:)))])
 disp(['max jt' num2str(max(Jt(1,:)))])
-[Rt,Rdt] = jtraj(0,0,tspan);
+[Rt,Rdt] = jtraj(0,0,tspan);%% 生成偏航角轨迹
 
+% 轨迹跟踪控制
 for k = 1:length(tspan)
     t = tspan(k);
     p = pt(:,k); v = vt(:,k); a = at(:,k); J = Jt(:,k); yaw = Rt(k); yawd = Rdt(k);
@@ -52,7 +53,7 @@ for k = 1:length(tspan)
     p_c = quads{1}.position + randn(1)*noise;
     v_c = quads{1}.velocity + randn(1)*noise;
     omg_c = quads{1}.Omega + randn(1)*noise;
-
+    % 计算控制输入（ u1 - 总推力：单独控制高度 u2 - 三轴力矩：控制姿态）
     [u1,u2] = uav_controller(p,v,a,J,yaw,yawd,p_c, v_c, quads{1}.attitude, omg_c, quads{1}.m, quads{1}.g,0.5,0.8,diag([1,1,1.2]),diag([0.1,0.1,1.2]));
     
     rotorSpeeds = get_rotorspeed(u1,u2,quads{1}.k,quads{1}.L,quads{1}.b);

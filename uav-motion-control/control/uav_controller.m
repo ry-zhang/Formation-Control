@@ -1,18 +1,18 @@
 % ksi_desired
 % ksi_desired_dot
 % ksi_desired_dot2
-% ksi_desied_dot3 ÓĞÓÃÂğ£¿
+% ksi_desied_dot3 ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
 % psi_desired
 % psi_desired_dot
-% psi_desired_dot2 ÓĞÓÃÂğ£¿
+% psi_desired_dot2 ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
 % ksi
 % ksi_dot
 
 % R
 % omega
-% omega_dot ÓĞÓÃÂğ£¿
+% omega_dot ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
 % m
 % g
@@ -20,7 +20,7 @@
 % Kp_ksi
 % Kd_ksi
 
-% Èç¹ûĞèÒª¾«Ï¸µ÷½Ú£¬¿ÉÒÔÉèÖÃÎª¶Ô½Ç¾ØÕó
+% ï¿½ï¿½ï¿½ï¿½ï¿½Òªï¿½ï¿½Ï¸ï¿½ï¿½ï¿½Ú£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Îªï¿½Ô½Ç¾ï¿½ï¿½ï¿½
 % Kp_omega
 % Kd_omega
 
@@ -41,9 +41,9 @@ function [u1,u2]=uav_controller(ksi_desired, ksi_desired_dot, ksi_desired_dot2, 
     R_desired=[xB_desired,yB_desired,zB_desired];
 
     e_R=1/2*vex((R_desired.')*R-(R.')*R_desired);
-    e_R = e_R.';
+%     e_R = e_R.';
 
-    % omega_desired µ½µ×¸ÃÔõÃ´Ëã£¿ »¹Ã»ÏëÍêÈ«Çå³ş¡£
+    % omega_desired ï¿½ï¿½ï¿½×¸ï¿½ï¿½ï¿½Ã´ï¿½ã£¿ ï¿½ï¿½Ã»ï¿½ï¿½ï¿½ï¿½È«ï¿½ï¿½ï¿½ï¿½ï¿½
     h=m/u1*(ksi_desired_dot3-dot(zB_desired,ksi_desired_dot3)*zB_desired);
     p_desired=-dot(h,yB_desired);
     q_desired=dot(h,xB_desired);
